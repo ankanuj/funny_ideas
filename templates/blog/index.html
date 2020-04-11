@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% block content %}
+{% if user.is_authenticated %}
+<section id='user'>
+    <div class="conatiner-fluid ">
+        <div class="row mx-auto">
+            <div class="col-md-3 text-center">
+                <div class="card-body ">
+                    <img id="user_img" src="{{profile.profile_photo.url}}" class="rounded-circle image-responsive ">
+                    <br>
+                    {%if user.is_authenticated %}
+                    <h3 class="text-center">{{user.username}}</h3>
+                    {% else %}
+                    <h3 class="text-center">username</h3>
+    
+                    {%endif%}
+                <!-- Button to Open the Modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Post Your Idea
+               </button>
+      
+                </div>
+    
+            </div>
+    
+            <div class="col-md-6">
+                <!--Form-->
+                <div class="card-body">
+               {% for post in post %}
+               {% if post %}
+                <div class="container">
+                    <h3><img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                    <p>{{post.content}}
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <h6>by {{post.user.first_name}} {{ post.user.last_name }}</h6>
+                        </div>
+                        <div class="col">
+                            <h6> {{post.date}}</h6>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <br> 
+               {% endfor %}
+                 
+    
+                <div class="container">
+                    <h3><img src="{{profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive"> Hello,welcome </h3>
+                    <p>welcome, thanks to joins us. About this web just share your idea like if u have any short 
+                        game idea which can be played with friend, if you have any suggestion related to education 
+                        system and etc.<br>
+                        no need to share any offensive idea or ant negative idea. if you do Action will be taken.
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <h6>by Anuj Chaudhary</h6>
+                        </div>
+                        
+                        <div class="col">
+                            <h6>date</h6>
+                        </div>
+                    </div>
+                </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+    </section>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="POST" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="heading">heading</label>
+                        <input  name="heading" class="form-control" type="text" placeholder=" example playing card" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Idea details</label>
+                        <textarea  name="content"  class="form-control" rows="6" cols="80"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+    
+    
+    
+{%else%}
+<div class="container pt-4">
+    <div class="card bg-light border-0 pt-2">
+    <div class="jumbtron pt-5 pb-5">
+        <center>
+            <div class="jumbotron">
+                <h3>Welcome to Funny Ideas</h3>
+                <br>
+            
+        <h6 class=" font-weight-bold">
+            <a href="{% provider_login_url "google" %}"  class="btn btn-danger btn-google"><i class="fab fa-google"></i> Login with Google</a>
+          </h6>
+        </div>
+        </center>
+    </div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
