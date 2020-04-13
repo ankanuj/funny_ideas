@@ -164,3 +164,9 @@ MESSAGE_TAGS = {
 #SITE_ID For All AUTH SITES
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
+
+#local settings
+try:
+    from .local_settings import *
+except ImportError:
+    pass
