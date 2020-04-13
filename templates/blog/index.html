@@ -9,7 +9,11 @@
         <div class="row mx-auto">
             <div class="col-md-3 text-center">
                 <div class="card-body ">
+                	{% if profile.profile_photo %}
                     <img id="user_img" src="{{profile.profile_photo.url}}" class="rounded-circle image-responsive ">
+                    {% else %}
+                    <img id="user_img" src="{% static 'img/profile.jpg' %}" class="rounded-circle image-responsive ">
+                    {% endif %}
                     <br>
                     {%if user.is_authenticated %}
                     <h3 class="text-center">{{user.username}}</h3>
@@ -32,7 +36,8 @@
                {% for post in post %}
                {% if post %}
                 <div class="container">
-                    <h3><img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                    <h3>
+                    	<img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
                     <p>{{post.content}}
                     </p>
                     <div class="row">
@@ -50,7 +55,7 @@
                  
     
                 <div class="container">
-                    <h3><img src="{{profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive"> Hello,welcome </h3>
+                    <h3><img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive"> Hello,welcome </h3>
                     <p>welcome, thanks to joins us. About this web just share your idea like if u have any short 
                         game idea which can be played with friend, if you have any suggestion related to education 
                         system and etc.<br>
