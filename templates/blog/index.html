@@ -7,7 +7,7 @@
 <section id='user'>
     <div class="conatiner-fluid ">
         <div class="row mx-auto">
-            <div class="col-md-3 text-center">
+            <div class="col-md-3 text-center bg-white">
                 <div class="card-body ">
                 	{% if profile.profile_photo %}
                     <img id="user_img" src="{{profile.profile_photo.url}}" class="rounded-circle image-responsive ">
@@ -72,6 +72,19 @@
                     </div>
                 </div>
     
+                </div>
+            </div>
+            <div class="col-md-3 pt-4 bg-white">
+                <h3 >Notice:</h3>
+                <div class="card-body">
+                    <h4>Updates coming soon</h4><hr>
+                    <ul>
+                        <li>edit post</li>
+                        <li>delete post</li>
+                        <li>profile photo on post</li>
+                        <li>can see your uploaded post on your profile</li>
+
+                    </ul>
                 </div>
             </div>
     
