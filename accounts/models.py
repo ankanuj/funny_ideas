@@ -34,3 +34,13 @@ class Post(models.Model):
     
     def __str__(self):
         return self.heading
+
+class Feedback(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    feedback = models.CharField(max_length=1000,blank=True)
+    date = models.DateTimeField(default=datetime.now, blank=True)
+
+    def __str__(self):
+        return self.feedback
+
+    

@@ -9,7 +9,7 @@ def index(request):
     if request.user.is_authenticated:
         user = request.user
         profile = Profile.objects.get(user = request.user)
-        post = Post.objects.all()
+        post = Post.objects.all().order_by('date')
         context={
             'user':user,
             'post':post,
@@ -55,4 +55,26 @@ def logout(request):
 		return redirect('home')
 
 
+@login_required(login_url='home')
+def feedback(request):
+    user = request.user
+    profile = Profile.objects.get(user = request.user)
+    post = Post.objects.all().order_by('date')
+    context={
+        'user':user,
+        'post':post,
+        'profile':profile,
+        }
+    if request.method=='POST':
+        user_id = request.user.id
+        feedback = request.POST['feedback']
+        feedbacks = Feedback(user_id = user_id,feedback = feedback)
+        feedbacks.save()
+        return redirect('home')
+    else:
+        return render(request,'blog/index.html',context)
 
+            
+
+    return render(request,'blog/index.html',context)
+    
