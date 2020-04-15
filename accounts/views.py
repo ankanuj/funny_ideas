@@ -41,6 +41,7 @@ def profile(request,pk=None):
     post = Post.objects.all().filter(user_id = user.id).order_by('date')
 
     content = {
+        'user':user,
         'profile':profile,
         'post' : post,
     }
