@@ -11,7 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
 admin.site.register(Profile,ProfileAdmin)
 
 class PostAdmin(admin.ModelAdmin):
-	list_display=('id','user','created', 'updated', 'is_published')
+	list_display=('id','user','date','is_published')
 	list_display_links=('id','user','is_published')
 	list_filter = ('user',)
 	search_fields = ('user',)

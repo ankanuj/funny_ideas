@@ -7,7 +7,7 @@ from datetime import datetime
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE)
     profile_photo = models.ImageField(upload_to='photos/%y/%m/%d/',blank=True)
-    date = models.DateTimeField(auto_now=True, blank=True)
+    date = models.DateTimeField(default=datetime.now, blank=True)
     is_published=models.BooleanField(default=True)
     
 
@@ -28,8 +28,7 @@ class Post(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     heading = models.CharField(max_length=200,blank=True)
     content = models.CharField(max_length=1000,blank=True)
-    created = models.DateTimeField(auto_now_add=True, blank=True)
-    updated = models.DateTimeField(auto_now=True, blank=True)
+    date = models.DateTimeField(default=datetime.now, blank=True)
     is_published=models.BooleanField(default=True)
     
     

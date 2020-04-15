@@ -9,7 +9,7 @@ def index(request):
     if request.user.is_authenticated:
         user = request.user
         profile = Profile.objects.get(user = request.user)
-        post = Post.objects.all().order_by('-created')
+        post = Post.objects.all().order_by('-date')
         context={
             'user':user,
             'post':post,
@@ -38,7 +38,7 @@ def profile(request,pk=None):
     else:
         user = request.user
     profile = Profile.objects.get(user = user)
-    post = Post.objects.all().filter(user_id = user.id).order_by('-created')
+    post = Post.objects.all().filter(user_id = user.id).order_by('-date')
 
     content = {
         'user':user,
