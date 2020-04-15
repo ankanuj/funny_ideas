@@ -32,10 +32,17 @@ def about(request):
     return render(request,'blog/about.html')
 
 @login_required(login_url='home')
-def profile(request):
-    profile = Profile.objects.get(user = request.user)
+def profile(request,pk=None):
+    if pk:
+        user = User.objects.get(pk = pk)
+    else:
+        user = request.user
+    profile = Profile.objects.get(user = user)
+    post = Post.objects.all().filter(user_id = user.id).order_by('date')
+
     content = {
         'profile':profile,
+        'post' : post,
     }
     if request.method=='POST':
         profile_photo = request.FILES['profile_photo']	

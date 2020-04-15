@@ -34,7 +34,7 @@
 <!-- Post column-->
     
         <div class="col-md-6">
-                <!--Form-->
+        
             <div class="card-body">
                {% for post in post %}
                {% if post %}
@@ -45,7 +45,7 @@
                     </p>
                     <div class="row">
                         <div class="col">
-                            <h6>by {{post.user.first_name}} {{ post.user.last_name }}</h6>
+                            <h6>by <a href="{% url 'profile_with_pk' pk=user.id %}" >{{post.user.first_name}} {{ post.user.last_name }}</a></h6>
                         </div>
                         <div class="col">
                             <h6> {{post.date}}</h6>
@@ -110,6 +110,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <form method="POST" action="{% url 'home' %}">
+<!--Form for Post Uloaded-->                    
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="heading">heading</label>
@@ -141,7 +142,9 @@
       
             <!-- Modal body -->
             <div class="modal-body">
+<!--form for upload feedback-->
                 <form method="POST" action="{% url 'feedback' %}">
+
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="feedback">Valueable feedback</label>

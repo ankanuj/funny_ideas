@@ -4,41 +4,63 @@
 <section id="user_profile">
     <div class="container-fluid pt-4 pb-3">
         <div class="row pt-4 ">
-            <div class="col-md-2">
-
-            </div>
-            <div class="col-md-3 pt-2">
-                <div  class="container text-center pt-2" id="profile">
+            
+            <div class="col-md-4 pt-2">
+                <div  class="container  pt-2" id="profile">
                     {% if profile.profile_photo %}
                     <img src="{{profile.profile_photo.url}}" id="user_img" class="rounded-circle image-responsive">
                     {% else %}      
                     <img src="{% static 'img/profile.jpg' %}" id="user_img" class="rounded-circle ">
                     {% endif %} 
                     <br>
-                    <br>
-                    <br> 
-                    <center>
-                              
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                                Upload Image
-                              </button>
-                              </center>
-                </div>
+                    <br>   
+                    {% if 'other_user' in request.path %}
+                    {% else %}        
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                        Upload Image
+                        </button>
+                    {% endif %}
+                    </div>
 
-            </div>
-            <div class="col-md-3 pt-5">
+            
+            
                 <div class="container">
                     {% if user.is_authenticated %}   
                         <h4>{{user.first_name}} {{user.last_name}}</h4>
                         <h4>{{ user.email }}</h4>
                     {% endif %}
-                    </div>
-
-            </div>
-
+                </div>
         </div>
-      
+
+            <div class="col-md-6 bg-white">
+                <h3>Post Uploaded</h3><hr>
+                
+        
+                    <div class="card-body example-1 scrollbar-ripe-malinka">
+                       {% for post in post %}
+                       {% if post %}
+                        <div class="container-fluid">
+                            <h3>
+                                <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                            <p>{{post.content}}
+                            </p>
+                            <div class="row">
+                                <div class="col">
+                                    <h6>by {{post.user.first_name}} {{ post.user.last_name }}</h6>
+                                </div>
+                                <div class="col">
+                                    <h6> {{post.date}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <br> 
+                       {% endfor %}
+                         
+            </div>
+        </div>
     </div>
+
     <!-- The Modal -->
     <div class="modal" id="myModal">
         <div class="modal-dialog">
