@@ -40,7 +40,11 @@
                {% if post %}
                 <div class="container">
                     <h3>
-                    	<img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                        {% if post.user.profile.profile_photo %}
+                    	<img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                        {% else %}
+                        <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                        {% endif %}
                     <p>{{post.content}}
                     </p>
                     <div class="row">
@@ -57,23 +61,7 @@
                {% endfor %}
                  
     
-                <div class="container">
-                    <h3><img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive"> Hello,welcome </h3>
-                    <p>welcome, thanks to joins us. About this web just share your idea like if u have any short 
-                        game idea which can be played with friend, if you have any suggestion related to education 
-                        system and etc.<br>
-                        no need to share any offensive idea or ant negative idea. if you do Action will be taken.
-                    </p>
-                    <div class="row">
-                        <div class="col">
-                            <h6>by Anuj Chaudhary</h6>
-                        </div>
-                        
-                        <div class="col">
-                            <h6>date</h6>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
@@ -178,7 +166,15 @@
     <div class="jumbtron pt-5 pb-5">
         <center>
             <div class="jumbotron">
-                <h3>Welcome to Funny Ideas</h3>
+                <div class="container">
+                    <h3>Funny Ideas </h3>
+                    <p class="text-justify">Welcome, thanks to join. About this web just share your idea like if u have any short 
+                        game idea which can be played with friend, if you have any suggestion related to education 
+                        system and etc.
+                        <b>If you have any creative idea for this Lockdown period then share with whole world.</b>
+                        <br>No need to share any offensive idea or any negative idea. If you do Action will be taken.
+                    </p>
+                </div>
                 <br>
             
         <h6 class=" font-weight-bold">
