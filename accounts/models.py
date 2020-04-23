@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE)
     profile_photo = models.ImageField(upload_to='photos/%y/%m/%d/',blank=True)
@@ -35,6 +36,7 @@ class Post(models.Model):
     def __str__(self):
         return self.heading
 
+
 class Feedback(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     feedback = models.CharField(max_length=1000,blank=True)
@@ -43,4 +45,15 @@ class Feedback(models.Model):
     def __str__(self):
         return self.feedback
 
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=250)
+    com_date = models.DateTimeField(default=datetime.now,blank=True)
+    is_published=models.BooleanField(default=True)
+    reply = models.ForeignKey('self',null=True,related_name='replies',blank=True,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment
     
+   

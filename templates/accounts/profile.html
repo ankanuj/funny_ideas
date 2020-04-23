@@ -7,10 +7,13 @@
             
             <div class="col-md-4 pt-2">
                 <div  class="container  pt-2" id="profile">
+                    <div class="user_img border-0">
                     {% if profile.profile_photo %}
                     <img src="{{profile.profile_photo.url}}" id="user_img" class="rounded-circle image-responsive">
+                    </div>
                     {% else %}      
                     <img src="{% static 'img/profile.jpg' %}" id="user_img" class="rounded-circle ">
+                    </div>
                     {% endif %} 
                     <br>
                     <br>   
@@ -45,12 +48,20 @@
                             <p>{{post.content}}
                             </p>
                             <div class="row">
-                                <div class="col">
-                                    <h6>by {{post.user.first_name}} {{ post.user.last_name }}</h6>
+                                <div class="col-sm-4">
+                                    <h6>by <a href="{% url 'profile_with_pk' pk=post.user.pk %}" >{{post.user.first_name}} {{ post.user.last_name }}</a></h6>
                                 </div>
-                                <div class="col">
-                                    <h6> {{post.date}}</h6>
+                                <div class="col-sm-5">
+                                    <div class="container">
+                                        <a  href="{% url 'comment' pk=post.pk %}">View and Add comment</a>
+                                     </div>
                                 </div>
+                               
+                                <div class="col-sm-3">
+                                    <h6> <code> {{post.date}}</code></h6>
+                                </div>
+        
+                                
                             </div>
                         </div>
                         {% endif %}

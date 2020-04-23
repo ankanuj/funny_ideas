@@ -1,0 +1,102 @@
+{% extends 'blog/index.html' %}
+{% load static %}
+{% block middle %}
+<div class="col-md-7">
+    <div class="card-body">
+       {%  if post %}
+     
+        <div class="container">
+            <h3>
+                {% if post.user.profile.profile_photo %}
+                <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                {% else %}
+                <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                {% endif %}
+            <p>{{post.content}}
+            </p>
+            <div class="row">
+                <div class="col">
+                    <h6>by <a href="{% url 'profile_with_pk' pk=post.user.pk %}" >{{post.user.first_name}} {{ post.user.last_name }}</a></h6>
+                </div>
+                <div class="col">
+                    <h6> {{post.date}}</h6>
+                </div>
+                <div class="col">
+                    <h6> {{post.id}}</h6>
+                </div>
+            </div>
+
+            <div class="container"> 
+                <h6>All comments {{ comment.count }}</h6>
+                <form method="POST" >
+                 {%csrf_token%}
+                    <div class="form-group">
+                        
+                        <input name="comment" class="form-control" type="text" placeholder="make comment" required >
+                        <button class="btn btn-info" type="submit">comment</button>
+                    </div>   
+                    </form>
+                    <div class="card">
+                        <div class="card-body example-1 scrollbar-ripe-malinka">
+                            {% for comment in comment %}
+                            <!--Display comments-->
+                            <div class="card-body pt-1 border  bg-light ">
+                                <div class="container rounded border border-radius-5 pt-0 bg-white ">
+                                    <code>by <a  class="card-link"  href="{% url 'profile_with_pk' pk=comment.user.pk %}">
+                                        {{comment.user.username}} </a> 
+                                    </code>
+                                     <code class="ml-5">{{comment.com_date}}</code>
+                                
+                                    <p>{{comment.comment}}</p>
+                                </div>
+                                   
+                                    <!--showing rplies-->
+
+                                    {% if comment.replies.all %}
+                                        <h6>Replies <code>{{ comment.replies.all.count }}</code><h6>
+                                            {% for reply in comment.replies.all %}
+                                                {% if reply in comment.replies.all %}
+                                                    
+                                                    <div class="card-body border-0 pt-0">
+                                                        <div class="container  pt-0">
+
+                                                            <code>by <a  class="card-link"  href="{% url 'profile_with_pk' pk=reply.user.pk %}">
+                                                                {{reply.user.username}} </a> 
+                                                            </code>
+                                                            <code class="ml-5">{{reply.com_date}}</code>
+                                                            <div class="container rounded border border-info bg-white pt-0 ml-0">
+                                                                <p>{{ reply.comment }}</p>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                    {% endif %}
+                                   
+                            </div>  
+                              
+                                <!--Submit Replies-->
+                                <div id="reply" class=" replied-comments container pt-2 border-0 bg-white" >                                   
+                                        <form method="POST" action="{% url 'reply' pk=post.pk %}">
+                                            {%csrf_token%}
+                                            <div class="form-group row">
+                                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                                <input name="comment" class="form-control border" type="text" placeholder="make reply" required >
+                                                <button class="btn btn-light" type="submit">reply</button>
+                                            </div>   
+                                        </form>
+                                </div>
+
+                            {% endfor %}
+                        </div>
+                    </div>   
+            </div>
+        </div>
+        <br> 
+       
+       {% endif %}
+    </div>
+</div>
+{% endblock %}

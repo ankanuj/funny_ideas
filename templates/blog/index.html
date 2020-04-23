@@ -11,11 +11,18 @@
 
             <div class="col-md-3 text-center bg-white">
                 <div class="card-body ">
-                	{% if profile.profile_photo %}
-                    <img id="user_img" src="{{profile.profile_photo.url}}" class="rounded-circle image-responsive ">
-                    {% else %}
-                    <img id="user_img" src="{% static 'img/profile.jpg' %}" class="rounded-circle image-responsive ">
-                    {% endif %}
+                    <center>
+                        <!--User Profile image-->
+                        <div class="user_img">
+                        {% if profile.profile_photo %}
+                        <img id="user_img" src="{{profile.profile_photo.url}}" class="rounded-circle image-responsive ">
+                    </div>
+                        {% else %}
+                        <div class="user_img">
+                        <img id="user_img" src="{% static 'img/profile.jpg' %}" class="rounded-circle image-responsive ">
+                    </div>
+                        {% endif %}
+                    </center>
                     <br>
                     {%if user.is_authenticated %}
                     <h3 class="text-center">{{user.username}}</h3>
@@ -23,7 +30,7 @@
                     <h3 class="text-center">username</h3>
     
                     {%endif%}
-                <!-- Button to Open the Modal -->
+                <!-- Button to Open the Modal for upload post -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                     Post Your Idea
                </button>
@@ -31,44 +38,61 @@
                 </div>
     
             </div>
+{% block middle %}
 <!-- Post column-->
     
-        <div class="col-md-6">
-        
+        <div class="col-md-7">
             <div class="card-body">
                {% for post in post %}
                {% if post %}
                 <div class="container">
                     <h3>
                         {% if post.user.profile.profile_photo %}
-                    	<img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                        <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
+                     </h3>
                         {% else %}
-                        <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                        <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
+                     </h3>
                         {% endif %}
                     <p>{{post.content}}
                     </p>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-sm-4">
                             <h6>by <a href="{% url 'profile_with_pk' pk=post.user.pk %}" >{{post.user.first_name}} {{ post.user.last_name }}</a></h6>
                         </div>
-                        <div class="col">
-                            <h6> {{post.date}}</h6>
+                        <div class="col-sm-5">
+                            <div class="container">
+                                <a  href="{% url 'comment' pk=post.pk %}">View and Add comment</a>
+                             </div>
                         </div>
+                       
+                        <div class="col-sm-3">
+                            <h6> <code> {{post.date}}</code></h6>
+                        </div>
+
+                        
+                    </div>
+                    <div class="row">
+                      <!--  <div class="col-sm-2">
+                            <div class="container">
+                                <a  href="{% url 'comment' pk=post.pk %}">Like</a>
+                             </div>
+                        </div>-->
+                        
                     </div>
                 </div>
                 {% endif %}
                 <br> 
+                </form>
                {% endfor %}
                  
     
 
             </div>
         </div>
-
+{%  endblock %}
 <!--Third update column-->
-            <div class="col-md-3 pt-4 bg-white">
-                <h3 >Notice:</h3>
-                <div class="card-body">
+            <div class="col-md-2 pt-4 bg-white">
                     <h4>Updates coming soon</h4><hr>
                     <ul>
                         <li>edit post</li>
@@ -76,21 +100,23 @@
                         
                         
                     </ul>
+
                     <h4>Updates</h4><hr>
+                    
                     <ul>
                         <li>can see your uploaded post on your profile</li>
                         <li>can see other profile</li>
                         <li>profile photo on post</li>
 
                     </ul>
-                </div>
                 <h3> Feedback:</h3>
+                
                 <div class="card-body">
                     <div class="container">
-                <!-- Button to Open the Modal -->
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#feedback">
-                    Feedback
-               </button>
+            <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#feedback">
+                            Feedback
+                        </button>
                     </div>
                 </div>
             </div>
@@ -113,7 +139,7 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Idea details</label>
-                        <textarea  name="content"  class="form-control" rows="6" cols="80"></textarea>
+                        <textarea  name="content"  class="form-control" rows="6" cols="80" required></textarea>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success" type="submit">Submit</button>

@@ -10,10 +10,14 @@ def index(request):
         user = request.user
         profile = Profile.objects.get(user = request.user)
         post = Post.objects.all().order_by('-date')
+        comment =  Comment.objects.all().order_by('-id')
+       
+
         context={
             'user':user,
             'post':post,
             'profile':profile,
+            'comment':comment,
         }
         if request.method=='POST':
             if user.is_authenticated:
@@ -75,3 +79,39 @@ def feedback(request):
         return render(request,'blog/index.html')
 
     
+def postdetail(request,pk):
+    post = Post.objects.get(pk=pk)
+    comment = Comment.objects.all().filter(post = post,reply=None).order_by('-id')
+    user = request.user
+    profile = Profile.objects.get(user = request.user)
+    if request.method=='POST':
+        user = request.user
+        post = post
+        comment = request.POST['comment']
+        reply_qs = None
+        comments = Comment(user=user,post=post,comment=comment,reply=reply_qs)
+        comments.save()
+        return redirect('comment',pk=pk)
+    context = {
+            'comment':comment,
+            'profile':profile,
+            'user':user,
+            'post':post,
+        }
+    return render(request,'accounts/comment.html',context)
+
+def create_reply(request,pk):
+    post = Post.objects.get(pk=pk)
+    if request.method=='POST':
+        user = request.user
+        post = post
+        comment = request.POST['comment']
+        reply_id = request.POST['comment_id']
+        reply_qs = None
+        if reply_id is not None:
+            reply_qs = Comment.objects.get(id=reply_id)
+        comments = Comment(user=user,post=post,comment=comment,reply=reply_qs)
+        comments.save()
+        return redirect('comment',pk=pk)
+    else:
+        return render(request,'accounts/comment.html')
