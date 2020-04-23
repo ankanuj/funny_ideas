@@ -43,8 +43,13 @@
                        {% for post in post %}
                        {% if post %}
                         <div class="container-fluid">
-                            <h3>
-                                <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
+                            <h3> {% if post.user.profile.profile_photo %}
+                                <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
+                            </h3>
+                                {% else %}
+                                <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
+                            </h3>
+                                {% endif %}
                             <p>{{post.content}}
                             </p>
                             <div class="row">
