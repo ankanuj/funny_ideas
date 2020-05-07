@@ -12,7 +12,7 @@
                 {% else %}
                 <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}} </h3>
                 {% endif %}
-            <p>{{post.content}}
+            <p>{{post.content|urlize}}
             </p>
             <div class="row">
                 <div class="col">
@@ -45,7 +45,7 @@
                                     </code>
                                      <code class="ml-5">{{comment.com_date}}</code>
                                 
-                                    <p>{{comment.comment}}</p>
+                                    <p>{{comment.comment|urlize}}</p>
                                 </div>
                                    
                                     <!--showing rplies-->
@@ -63,7 +63,7 @@
                                                             </code>
                                                             <code class="ml-5">{{reply.com_date}}</code>
                                                             <div class="container rounded border border-info bg-white pt-0 ml-0">
-                                                                <p>{{ reply.comment }}</p>
+                                                                <p>{{ reply.comment|urlize }}</p>
                                                             </div>
                                                         
                                                         </div>

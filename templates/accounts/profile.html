@@ -50,7 +50,7 @@
                                 <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
                             </h3>
                                 {% endif %}
-                            <p>{{post.content}}
+                            <p>{{post.content|urlize}}
                             </p>
                             <div class="row">
                                 <div class="col-sm-4">
