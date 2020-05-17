@@ -115,3 +115,34 @@ def create_reply(request,pk):
         return redirect('comment',pk=pk)
     else:
         return render(request,'accounts/comment.html')
+
+
+def debate(request):
+    debate = Debate.objects.all()
+    context = {
+        'debate':debate,
+    }
+    return render(request,'debate/debate.html',context)
+
+def debate_details(request):
+    if 'online_classes' in request.path :
+        debate = Debate.objects.all().filter(topic = 'online class').order_by('-id')
+    elif 'tour_of_duty' in request.path:
+        debate = Debate.objects.all().filter(topic = 'Tour of Duty').order_by('-id')
+    elif 'extend_lockdown' in request.path:
+        debate = Debate.objects.all().filter(topic = 'Extend Lockdown').order_by('-id')
+
+    context = {
+        'debate':debate,
+    }
+    if request.method == 'POST':
+        comment = request.POST['comment']
+        topic = request.POST['topic']
+        side = request.POST['side']
+        user_id = request.user.id
+        db = Debate(user_id = user_id , topic=topic , comment=comment,side=side)
+        db.save()
+        return render(request,'debate/debate_details.html',context)
+    
+    return render(request,'debate/debate_details.html',context)
+

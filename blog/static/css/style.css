@@ -9,8 +9,16 @@
     max-height: 250px;
 }
 #user_img2{
-    max-width:50px;
-    max-height: 50px;
+    min-width:30px;
+    max-width:30px;
+    min-height: 30px;
+    max-height: 30px;
+
+}
+#user_img3{
+    min-width:40px;
+    max-width:40px;
+    max-height: 30px;
 }
 .user_comment{
     max-width: 25px;

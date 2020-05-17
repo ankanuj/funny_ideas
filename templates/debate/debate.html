@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="header">
+    <div class="conatnier-fluid ">
+        <h1 class="text-center text-info"> Welcome To Debate </h1>
+        <p class="text-justify ml-3 mr-3 text-secondary" style="font-size: 20px;"> Debate on on new current and hot topics. No offensive word use, no perrsonal attacks, debate should be in proper and respective manner.
+            Choose one side either oppose or defence.
+        </p>
+    </div>  
+
+
+    {% block debate_details %}
+    <div class="conainer">
+        <center><p class="text-info" style="font-size: 30px;">Choose Topic</p></center> 
+        <div class="row mx-auto">
+            <div class="col-sm-3 ml-5">
+                <center>
+                    <h4>Online classes good or bad?</h4>
+                    <div class="card-body bg-white border" style="min-height:400px;" >
+                        <p class="text-justify" style="font-size: 20px;">An online class is a course conducted over the Internet. They are generally conducted through a learning management system, in which students can view their course syllabus and 
+                            academic progress, as well as communicate with fellow students and their course instructor</p>
+                    </div>
+                    <a class="btn btn-seondary" href="{%url 'debate_details_1'%}">Click here to participate</a>
+                </center>
+            </div>
+            <div class="col-sm-4 ">
+                <center><h4>Tour of Duty</h4>
+                <div class="card-body bg-white border" style="min-height:400px;">
+                    <p class="text-justify" style="font-size: 20px;">
+                        Tour of Duty allows civilians of the country to join the Indian Army for three years and serve the country as an army soldier. The proposal is yet under process but it has certainly gained a lot of popularity.
+                        This could be a great opportunity for those who would like to experience the work of a soldier without actually pursuing it as a career.
+                    </p>
+                </div>
+                <a class="btn btn-seondary" href="{%url 'debate_details_2'%}">Click here to participate</a>
+
+            </center>
+            </div>
+            <div class="col-sm-4">
+                <center><h4>Extend Lockdown?</h4>
+                <div class="card-body bg-white border" style="min-height:400px;">
+                    <p class="text-justify" style="font-size: 20px;">
+                        A lockdown is an emergency protocol that prevents people from leaving a given area. A full lockdown will mean you must stay where you are and not exit or enter a building or the given area. This scenario usu
+                        ally allows for essential supplies. All non-essential activities remain shut for the entire period.
+                    </p>
+                </div>
+                <a class="btn btn-seondary" href="{%url 'debate_details_3'%}">Click here to participate</a>
+
+            </center>
+            </div>
+            </div>
+        </div>
+        {% endblock %}
+</section>
+{%endblock%}

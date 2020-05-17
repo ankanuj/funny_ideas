@@ -56,4 +56,14 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment
     
-   
+
+class Debate(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    topic = models.CharField(max_length=100)
+    is_published=models.BooleanField(default=True)
+    comment = models.TextField(max_length=1500)
+    side = models.CharField(max_length=50,default='defence')
+    com_date = models.DateTimeField(default=datetime.now,blank=True)
+
+    def __str__(self):
+        return self.topic

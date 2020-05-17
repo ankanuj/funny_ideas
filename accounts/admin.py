@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile,Post,Feedback,Comment
+from .models import Profile,Post,Feedback,Comment,Debate
 
 class ProfileAdmin(admin.ModelAdmin):
 	list_display=('id','user','date','is_published')
@@ -36,3 +36,13 @@ class CommentAdmin(admin.ModelAdmin):
 	list_per_page = 25
 
 admin.site.register(Comment,CommentAdmin)
+
+
+class DebateAdmin(admin.ModelAdmin):
+	list_display=('id','user','topic','com_date','is_published')
+	list_display_links=('id','user','topic')
+	list_filter = ('user','topic')
+	search_fields = ('user','topic')
+	list_per_page = 25
+
+admin.site.register(Debate,DebateAdmin)

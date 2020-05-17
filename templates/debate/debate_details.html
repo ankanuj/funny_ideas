@@ -1,0 +1,106 @@
+{% extends 'debate/debate.html' %}
+{% load static %}
+{% block debate_details %}
+
+<section id="form">
+    <div class="conatiner ml-5 mr-5">
+        <div class="row mx-auto">
+            <div class="col-sm-2">
+                <!-- Button to Open the Modal for upload post -->
+                {% if use.is_authenticated %}
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                    Post Your Views
+               </button>
+               {% else %}
+               <a href="{% url 'home' %}" class="btn btn-info btn-lg">
+                     Post Your Views
+               </a>
+               {%  endif %}
+               <br><br>
+               <h4> Select topic</h4>
+               <hr>
+                   <h6>1.<a href="{%url 'debate_details_1'%}">Online classes good or bad?</a></h6>
+                   <h6>2.<a href="{%url 'debate_details_2'%}" >Tour of Duty.</a></h6>
+                   <h6>3.<a href="{%url 'debate_details_3'%}">Extend Lockdown?</a></h6>
+
+            
+            </div>
+            <div class="col-sm-9 bg-white">
+                {% if 'online_classes' in request.path %}
+                <h3>Online classes good or bad?</h3>
+                {% elif 'tour_of_duty' in request.path %}
+                <h3>Tour of Duty.</h3>
+                {% elif 'extend_lockdown' in request.path %}
+                <h3>Extend Lockdown?</h3>
+
+                {% endif %}
+                <hr>
+                <div class="container">
+                    {% for debate in debate %}
+                    {% if debate.user.profile.profile_photo %}
+                    <h4>
+                        <img src="{{debate.user.profile.profile_photo.url}}" id="user_img3" class="rounded-circle image-responsive">
+                            {{debate.user}} <code>{{debate.side}}</code>
+                    </h4>
+                    {% else %}
+                    <img src="{% static 'img/profile.jpg' %}" id="user_img3" class="rounded-circle image-responsive">
+                        {{debate.user}} <code>{{debate.side}}</code>
+                </h4>
+                    {% endif %}
+                    
+                    <p class="text-justify ml-3 pb-0" style="font-size: 20px;">{{debate.comment|urlize}}</p>
+                    {% endfor %}
+                </div>
+                
+            </div>
+
+
+        </div>
+        
+    </div>
+</section>
+<!-- The Modal for Upload post-->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form method="POST">
+<!--Form for Post Uloaded-->                    
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="topic">Select Topic</label>
+                    <select class="form-control" name="topic">
+                        <option>online class</option>
+                        <option>Tour of Duty</option>
+                        <option>Extend Lockdown</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="side">Select Side</label>
+                    <select class="form-control" name="side">
+                        <option>Defence</option>
+                        <option>Oppose</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="content">Your Comment</label>
+                    <textarea  name="comment"  class="form-control" rows="10" cols="80" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+{% endblock %}
