@@ -5,7 +5,7 @@
 <section id="form">
     <div class="conatiner ">
         <div class="row mx-auto">
-            <div class="col-md-2">
+            <div class="col-lg-2">
                 <!-- Button to Open the Modal for upload post -->
                 {% if use.is_authenticated %}
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
@@ -25,7 +25,7 @@
 
             
             </div>
-            <div class="col-md-8 bg-white" id="debate_section_col">
+            <div class="col-lg-10 bg-white" id="debate_section_col">
                 {% if 'online_classes' in request.path %}
                 <h3>Online classes good or bad?</h3>
                 {% elif 'tour_of_duty' in request.path %}

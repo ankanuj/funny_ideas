@@ -143,3 +143,16 @@
         margin-left: 0px;
     }
 }
+@media (max-width: 990px) {
+    #debate_section_col{
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+    #card{
+        min-height:200px;
+    }
+    #col-debate_1{
+        margin-left: 0px;
+    }
+}
