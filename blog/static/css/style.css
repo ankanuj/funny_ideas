@@ -120,3 +120,26 @@
     position: relative;
     overflow-y: scroll;
     height: 400px; }
+
+#col-debate_1{
+    margin-left: 50px;
+}
+#card{
+    min-height:400px;
+}
+    
+@media (max-width: 768px) {
+    #debate_section_col{
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-top: 10px;
+
+
+    }
+    #card{
+        min-height:200px;
+    }
+    #col-debate_1{
+        margin-left: 0px;
+    }
+}

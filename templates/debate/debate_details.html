@@ -3,9 +3,9 @@
 {% block debate_details %}
 
 <section id="form">
-    <div class="conatiner ml-5 mr-5">
+    <div class="conatiner ">
         <div class="row mx-auto">
-            <div class="col-sm-2">
+            <div class="col-md-2">
                 <!-- Button to Open the Modal for upload post -->
                 {% if use.is_authenticated %}
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
@@ -25,7 +25,7 @@
 
             
             </div>
-            <div class="col-sm-9 bg-white">
+            <div class="col-md-8 bg-white" id="debate_section_col">
                 {% if 'online_classes' in request.path %}
                 <h3>Online classes good or bad?</h3>
                 {% elif 'tour_of_duty' in request.path %}
@@ -35,7 +35,7 @@
 
                 {% endif %}
                 <hr>
-                <div class="container">
+                <div class="container ">
                     {% for debate in debate %}
                     {% if debate.user.profile.profile_photo %}
                     <h4>
@@ -48,7 +48,7 @@
                 </h4>
                     {% endif %}
                     
-                    <p class="text-justify ml-3 pb-0" style="font-size: 20px;">{{debate.comment|urlize}}</p>
+                    <p class="text-justify ml-2 pb-0" style="font-size: 20px;">{{debate.comment|urlize}}</p>
                     {% endfor %}
                 </div>
                 
