@@ -9,7 +9,7 @@ def index(request):
     if request.user.is_authenticated:
         user = request.user
         profile = Profile.objects.get(user = request.user)
-        post = Post.objects.all().order_by('-date')
+        post = Post.objects.all().order_by('-id')
         comment =  Comment.objects.all().order_by('-id')
        
 
