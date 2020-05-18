@@ -30,11 +30,12 @@
                     <h3 class="text-center">username</h3>
     
                     {%endif%}
+                   {% block edit %} 
                 <!-- Button to Open the Modal for upload post -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                     Post Your Idea
                </button>
-      
+               {% endblock %}
                 </div>
     
             </div>
@@ -43,18 +44,32 @@
     
         <div class="col-md-7" >
             
-                <div class="card-body">
+                <div class="card-body bg-white">
                     {% for post in post %}
                     {% if post %}
-                        <div class="container">
+                        <div class="container border">
                             <h3>
+                                {% if post.user == request.user %}
+                                <div class="dropdown">
+                                <button type="button" class="btn bg-white " data-toggle="dropdown" style="float:right;"><i class="fas fa-ellipsis-v " style="font-size: 20px;"></i></button>
+                                    <div class="dropdown-menu">
+                                        <a type="button" class="btn dropdown-item" href="{% url 'edit_post' pk=post.pk %}">edit</a>
+                                        <a type="button" class="btn dropdown-item" href="{% url 'delete_post' pk=post.pk %}">Delete</a>
+                                    </div>
+                                </div>
+                                {%else%}
+                                {% endif %}
                                 {% if post.user.profile.profile_photo %}
-                                <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
+                                <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">
+                                {{post.heading}}
+                                
                             </h3>
                                 {% else %}
-                                <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
+                                <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">
+                                {{post.heading}}
                             </h3>
                                 {% endif %}
+                               
                             <p>{{post.content|urlize}}
                             </p>
                             <div class="row">
@@ -84,11 +99,7 @@
                         </div>
                         {% endif %}
                         <br> 
-                        </form>
                     {% endfor %}
-                 
-    
-
                 </div>
            
         </div>
@@ -99,9 +110,7 @@
                     <ul>
                         <li>edit post</li>
                         <li>delete post</li>
-                        <li>mention user in comment</li>
-                        
-                        
+                        <li>mention user in comment</li>     
                     </ul>
 
                     <h4>Updates</h4><hr>
@@ -128,6 +137,8 @@
         </div>
     </div>
 </section>
+
+
     <!-- The Modal for Upload post-->
     <div class="modal" id="myModal">
         <div class="modal-dialog">
@@ -190,7 +201,7 @@
           </div>
         </div>
       </div>
-    
+
     
 {%else%}
 <div class="container pt-4">

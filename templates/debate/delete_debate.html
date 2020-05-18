@@ -1,0 +1,55 @@
+{% extends 'debate/debate_details.html' %}
+{% load static %}
+{% block debate_middle%}
+<div class="col-lg-10 bg-white" id="debate_section_col">
+       
+    <h3>Delete Your Comment?</h3>
+
+    <hr>
+    <div class="container ">
+        <button type="button" class="btn btn-outline-danger "  data-toggle="modal" data-target="#delete" style="float:right;">Delete</button>
+        {% if debate.user.profile.profile_photo %}
+        <h4>
+            <img src="{{debate.user.profile.profile_photo.url}}" id="user_img3" class="rounded-circle image-responsive">
+                {{debate.user}} <code>{{debate.side}}</code>
+        </h4>
+        {% else %}
+        <img src="{% static 'img/profile.jpg' %}" id="user_img3" class="rounded-circle image-responsive">
+            {{debate.user}} <code>{{debate.side}}</code>
+    </h4>
+        {% endif %}
+        
+        <p class="text-justify ml-2 pb-0" style="font-size: 20px;">{{debate.comment|urlize}}</p>
+    </div>
+
+
+             <!-- The Modal for Upload post-->
+ <div class="modal" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form method="POST" >
+<!--Form for Post Uloaded-->                    
+                {% csrf_token %}
+                    <p>want to delete your comment?</p>
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                    <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+ 
+
+</div>
+{% endblock %}

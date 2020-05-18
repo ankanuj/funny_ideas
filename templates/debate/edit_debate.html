@@ -1,0 +1,34 @@
+{% extends 'debate/debate_details.html' %}
+{% block debate_middle%}
+<div class="col-lg-10 bg-white" id="debate_section_col">
+    <div class="container">
+        <h2>Edit Comment</h2>
+        <form method="POST">
+            <!--Form for Post Uloaded-->                    
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <h3>Topic:</h3>
+                                <p class="ml-2" style="font-size:20px;">{{debate.topic}}</p>
+            
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="side">Select Side</label>
+                                <select class="form-control" name="side">
+                                    <option>Defence</option>
+                                    <option>Oppose</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Your Comment</label>
+                                <textarea  name="comment"  class="form-control" rows="10" cols="80" required>{{ debate.comment }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Edit</button>
+                            </div>
+                        </form>
+
+    </div>
+
+</div>
+{% endblock %}

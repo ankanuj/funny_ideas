@@ -1,0 +1,82 @@
+{% extends 'blog/index.html' %}
+{% load static %}
+{% block edit %}
+{% endblock %}
+
+{% block middle %}
+<div class="col-md-7">
+    
+    {% if post %}
+        <div class="container border">
+            <h3>
+                {% if post.user.profile.profile_photo %}
+                <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">
+                {{post.heading}}
+                
+                <button type="button" class="btn btn-outline-danger "  data-toggle="modal" data-target="#delete" style="float:right;">Delete</button>
+                   
+            </h3>
+                {% else %}
+                <img src="{% static 'img/profile.jpg' %}" id="user_img2" class="rounded-circle image-responsive">
+                {{post.heading}}
+            </h3>
+                {% endif %}
+            <p>{{post.content|urlize}}
+            </p>
+            <div class="row">
+                <div class="col-sm-4">
+                    <h6>by <a href="{% url 'profile_with_pk' pk=post.user.pk %}" >{{post.user.first_name}} {{ post.user.last_name }}</a></h6>
+                </div>
+                <div class="col-sm-5">
+                    <div class="container">
+                        <a  href="{% url 'comment' pk=post.pk %}">View and Add comment</a>
+                    </div>
+                </div>
+            
+                <div class="col-sm-3">
+                    <h6> <code> {{post.date}}</code></h6>
+                </div>
+
+                
+            </div>
+            <div class="row">
+            <!--  <div class="col-sm-2">
+                    <div class="container">
+                        <a  href="{% url 'comment' pk=post.pk %}">Like</a>
+                    </div>
+                </div>-->
+                
+            </div>
+        </div>
+        {% endif %}
+         <!-- The Modal for Upload post-->
+ <div class="modal" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form method="POST" >
+<!--Form for Post Uloaded-->                    
+                {% csrf_token %}
+                    <p>Delete This Post?</p>
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                    <button type="button" class="btn btn-outline-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+
+{% endblock %}

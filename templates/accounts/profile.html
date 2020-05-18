@@ -43,7 +43,18 @@
                        {% for post in post %}
                        {% if post %}
                         <div class="container-fluid">
-                            <h3> {% if post.user.profile.profile_photo %}
+                            <h3>
+                                {% if post.user == request.user %}
+                                <div class="dropdown">
+                                <button type="button" class="btn bg-white " data-toggle="dropdown" style="float:right;"><i class="fas fa-ellipsis-v " style="font-size: 20px;"></i></button>
+                                    <div class="dropdown-menu">
+                                        <a type="button" class="btn dropdown-item" href="{% url 'edit_post' pk=post.pk %}">edit</a>
+                                        <a type="button" class="btn dropdown-item" href="{% url 'delete_post' pk=post.pk %}">Delete</a>
+                                    </div>
+                                </div>
+                                {%else%}
+                                {% endif %} 
+                                {% if post.user.profile.profile_photo %}
                                 <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
                             </h3>
                                 {% else %}

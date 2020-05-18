@@ -1,0 +1,28 @@
+{% extends 'blog/index.html' %}
+{% block edit %}
+{% endblock %}
+
+{% block middle %}
+<div class="col-md-7">
+    <div class=" conatiner-fluid">
+        <div class="jumbotron bg-white">
+            <h2>Edit Post</h2><hr>
+        <form method="POST" style="margin-left:10px;">
+            {%csrf_token%}
+            <div class="form-group">
+                <b><lable for="heading" style="font-size: 25px;">Heading</lable></b>
+                <input class="form-control" name="heading" value={{post.heading}} >
+
+            </div>
+            <div class="form-group">
+                <b><label for="content" style="font-size: 25px;">Idea Details</label></b>
+                <textarea rows="10" class="form-control" cols="15" name="content" >{{post.content}}</textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-info">update</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -25,7 +25,9 @@
 
             
             </div>
+            {% block debate_middle %}
             <div class="col-lg-10 bg-white" id="debate_section_col">
+                
                 {% if 'online_classes' in request.path %}
                 <h3>Online classes good or bad?</h3>
                 {% elif 'tour_of_duty' in request.path %}
@@ -37,6 +39,16 @@
                 <hr>
                 <div class="container ">
                     {% for debate in debate %}
+                    {% if debate.user == request.user %}
+                    <div class="dropdown">
+                    <button type="button" class="btn bg-white " data-toggle="dropdown" style="float:right;"><i class="fas fa-ellipsis-v " style="font-size: 20px;"></i></button>
+                        <div class="dropdown-menu">
+                            <a type="button" class="btn dropdown-item" href="{% url 'edit_debate' pk=debate.pk %}">edit</a>
+                            <a type="button" class="btn dropdown-item" href="{% url 'delete_debate' pk=debate.pk %}">Delete</a>
+                        </div>
+                    </div>
+                    {%else%}
+                    {% endif %}
                     {% if debate.user.profile.profile_photo %}
                     <h4>
                         <img src="{{debate.user.profile.profile_photo.url}}" id="user_img3" class="rounded-circle image-responsive">
@@ -53,7 +65,7 @@
                 </div>
                 
             </div>
-
+            {% endblock %}
 
         </div>
         
