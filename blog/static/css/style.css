@@ -126,6 +126,7 @@
 }
 #card{
     min-height:400px;
+    box-shadow: 4px 4px 20px 2px darkgray;
 }
     
 @media (max-width: 768px) {

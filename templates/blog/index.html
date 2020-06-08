@@ -15,7 +15,7 @@
                         <!--User Profile image-->
                         <div class="user_img">
                         {% if profile.profile_photo %}
-                        <img id="user_img" src="{{profile.profile_photo.url}}" class="rounded-circle image-responsive ">
+                        <img id="user_img" style="box-shadow: 4px 4px 20px 2px darkgray;" src="{{profile.profile_photo.url}}" class="rounded-circle image-responsive ">
                     </div>
                         {% else %}
                         <div class="user_img">
@@ -47,7 +47,7 @@
                 <div class="card-body bg-white">
                     {% for post in post %}
                     {% if post %}
-                        <div class="container border">
+                        <div class="container border-0"  style="box-shadow: 4px 4px 20px 2px darkgray;">
                             <h3>
                                 {% if post.user == request.user %}
                                 <div class="dropdown">
@@ -206,7 +206,7 @@
     <div class="card bg-light border-0 pt-2">
     <div class="jumbtron pt-5 pb-5">
         <center>
-            <div class="jumbotron">
+            <div class="jumbotron" style="box-shadow:4px 4px 20px 2px darkgray;">
                 <div class="container">
                     <h3>Funny Ideas </h3>
                     <p class="text-justify">Welcome, thanks to join. About this web just share your idea like if u have any short 

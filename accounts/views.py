@@ -231,3 +231,4 @@ def delete_debate(request,pk):
         'debate':debate,
     }
     return render(request,'debate/delete_debate.html',context)
+

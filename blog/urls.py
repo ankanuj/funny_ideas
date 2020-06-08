@@ -14,7 +14,6 @@ urlpatterns = [
     path('debate/topic/online_classes',debate_details,name='debate_details_1'),
     path('debate/topic/tour_of_duty',debate_details,name='debate_details_2'),
     path('debate/topic/extend_lockdown',debate_details,name='debate_details_3'),
-
     path('accounts/', include('accounts.urls')),
     path('accounts/',include('allauth.urls')),
 

@@ -43,8 +43,7 @@
                        {% for post in post %}
                        {% if post %}
                         <div class="container-fluid">
-                            <h3>
-                                {% if post.user == request.user %}
+                            {% if post.user == request.user %}
                                 <div class="dropdown">
                                 <button type="button" class="btn bg-white " data-toggle="dropdown" style="float:right;"><i class="fas fa-ellipsis-v " style="font-size: 20px;"></i></button>
                                     <div class="dropdown-menu">
@@ -53,8 +52,8 @@
                                     </div>
                                 </div>
                                 {%else%}
-                                {% endif %} 
-                                {% if post.user.profile.profile_photo %}
+                            {% endif %}
+                            <h3> {% if post.user.profile.profile_photo %}
                                 <img src="{{post.user.profile.profile_photo.url}}" id="user_img2" class="rounded-circle image-responsive">{{post.heading}}
                             </h3>
                                 {% else %}
