@@ -35,6 +35,9 @@ def index(request):
 def about(request):         
     return render(request,'blog/about.html')
 
+def terms(request):         
+    return render(request,'blog/terms_and_conditions.html')
+
 @login_required(login_url='home')
 def profile(request,pk=None):
     if pk:

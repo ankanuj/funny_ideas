@@ -25,7 +25,6 @@
    <div class="row  text-center d-flex justify-content-center pt-5 mb-3">
 
 <!--grid col1 -->
-          <div class="col"></div>
           <div class="col-md-2 mb-2">
         <h6 class=" font-weight-bold"
             {% if '/' == request.path%}
@@ -49,9 +48,17 @@
             <a  href="{% url 'about_us' %}">About us</a>
           </h6>
         </div>
-            <div class="col ">
-            
-          </div>        
+        <div class="col-md-2 mb-2">
+          <h6 class=" font-weight-bold"
+            {% if 'terms' in request.path%}
+             class="active mr-3"
+           {% else %}
+             class="mr-3"
+           {%endif%}
+           >
+           <a  href="{% url 'terms' %}">terms and conditions</a>
+         </h6>
+       </div>       
    </div>
     </div>
     <!-- Copyright -->
