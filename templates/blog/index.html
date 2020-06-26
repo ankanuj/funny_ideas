@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load socialaccount %}
-{% providers_media_js %}
+
 {% block content %}
-{% if user.is_authenticated %}
+
 <section id='user'>
     <div class="conatiner-fluid ">
-        <div class="row mx-auto">
+        <div class="row mx-auto pt-2">
 <!--user column-->
 
             <div class="col-md-3 text-center bg-white">
@@ -31,10 +30,14 @@
     
                     {%endif%}
                    {% block edit %} 
-                <!-- Button to Open the Modal for upload post -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                    Post Your Idea
-               </button>
+                    {% if user.is_authenticated %}
+                     <!-- Button to Open the Modal for upload post -->
+                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                             Post Your Idea
+                        </button>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Post Your Idea</a>
+                    {% endif %}
                {% endblock %}
                 </div>
     
@@ -42,7 +45,7 @@
 {% block middle %}
 <!-- Post column-->
     
-        <div class="col-md-7" >
+        <div class="col-md-7 " >
             
                 <div class="card-body bg-white">
                     {% for post in post %}
@@ -74,11 +77,20 @@
                             </p>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <h6>by <a href="{% url 'profile_with_pk' pk=post.user.pk %}" >{{post.user.first_name}} {{ post.user.last_name }}</a></h6>
-                                </div>
+                                    <h6>by 
+                                        {% if user.is_authenticated %}
+                                        <a href="{% url 'profile_with_pk' pk=post.user.pk %}" >{{post.user.first_name}} {{ post.user.last_name }}</a></h6>
+                                        {% else %}
+                                        <a href="{% url 'login' %}">{{post.user.first_name}} {{ post.user.last_name }}</a>
+                                        {% endif %}
+                                    </div>
                                 <div class="col-sm-5">
                                     <div class="container">
-                                        <a  href="{% url 'comment' pk=post.pk %}">View and Add comment</a>
+                                        {% if user.is_authenticated %}
+                                        <a  href="{% url 'comment' pk=post.pk %}">view and add comment</a>
+                                        {% else %}
+                                        <a href="{% url 'login' %}">view and add comment</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             
@@ -126,9 +138,14 @@
                 <div class="card-body">
                     <div class="container">
             <!-- Button to Open the Modal -->
+            {% if user.is_authenticated %}
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#feedback">
                             Feedback
                         </button>
+            
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-danger">Feedback</a>
+            {% endif %}
                     </div>
                 </div>
             </div>
@@ -201,30 +218,5 @@
       </div>
 
     
-{%else%}
-<div class="container pt-4">
-    <div class="card bg-light border-0 pt-2">
-    <div class="jumbtron pt-5 pb-5">
-        <center>
-            <div class="jumbotron" style="box-shadow:4px 4px 20px 2px darkgray;">
-                <div class="container">
-                    <h3>Funny Ideas </h3>
-                    <p class="text-justify">Welcome, thanks to join. About this web just share your idea like if u have any short 
-                        game idea which can be played with friend, if you have any suggestion related to education 
-                        system and etc.
-                        <b>If you have any creative idea for this Lockdown period then share with whole world.</b>
-                        <br>No need to share any offensive idea or any negative idea. If you do Action will be taken.
-                    </p>
-                </div>
-                <br>
-            
-        <h6 class=" font-weight-bold">
-            <a href="{% provider_login_url "google" %}"  class="btn btn-danger btn-google"><i class="fab fa-google"></i> Login with Google</a>
-          </h6>
-        </div>
-        </center>
-    </div>
-</div>
-</div>
-{% endif %}
+
 {% endblock %}

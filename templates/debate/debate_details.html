@@ -12,8 +12,8 @@
                     Post Your Views
                </button>
                {% else %}
-               <a href="{% url 'home' %}" class="btn btn-info btn-lg">
-                     Post Your Views
+               <a href="{% url 'login' %}" class="btn btn-info btn-lg">
+                     Post Your comment.
                </a>
                {%  endif %}
                <br><br>
@@ -26,7 +26,7 @@
             
             </div>
             {% block debate_middle %}
-            <div class="col-lg-10 bg-white" id="debate_section_col">
+            <div class="col-lg-9 bg-white" id="debate_section_col" style="box-shadow: 4px 4px 20px lightgray; margin-right: 10px; margin-left: 10px;">
                 
                 {% if 'online_classes' in request.path %}
                 <h3>Online classes good or bad?</h3>
@@ -37,7 +37,7 @@
 
                 {% endif %}
                 <hr>
-                <div class="container ">
+                <div class="container " style="box-shadow: 4px 4px 20px lightgray;">
                     {% for debate in debate %}
                     {% if debate.user == request.user %}
                     <div class="dropdown">

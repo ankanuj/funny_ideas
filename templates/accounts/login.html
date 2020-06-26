@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% block content %}
+{% if user.is_authenticated %}
+{% else %}
+<center>
+    <div class="container pt-5 ">
+        <div class="card pb-2 pt-2" style="min-width:200p; max-width:300px; box-shadow: 4px 4px 20px lightgray;">
+            <h3 class="card-title">Login</h3>
+            <center>
+            <a href="{% provider_login_url "google" %}"  class="  btn btn-danger btn-sm btn-google"><i class="fab fa-google"></i>  Google</a>
+            </center>
+        </div>
+    </div>
+</center>
+{% endif %}
+{% endblock %}

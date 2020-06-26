@@ -6,11 +6,18 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 
 def index(request):
+    post = Post.objects.all().order_by('-id')
+    comment =  Comment.objects.all().order_by('-id')
+
+    post_details={
+            'post':post,
+            'comment':comment,
+
+    }
     if request.user.is_authenticated:
         user = request.user
         profile = Profile.objects.get(user = request.user)
-        post = Post.objects.all().order_by('-id')
-        comment =  Comment.objects.all().order_by('-id')
+        
        
 
         context={
@@ -30,13 +37,20 @@ def index(request):
             else:
                 return redirect('home')
         return render(request,'blog/index.html',context)
-    return render(request,'blog/index.html')
+    return render(request,'blog/index.html',post_details)
 
 def about(request):         
     return render(request,'blog/about.html')
 
 def terms(request):         
     return render(request,'blog/terms_and_conditions.html')
+
+def login(request):
+    user = request.user
+    if user.is_authenticated:
+        return redirect("home")
+    else:
+        return render(request,'accounts/login.html')
 
 @login_required(login_url='home')
 def profile(request,pk=None):
